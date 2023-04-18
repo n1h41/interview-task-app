@@ -34,66 +34,76 @@ class PostScreen extends HookConsumerWidget {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.posts.length +
-                          (state.status == PostStatus.loading ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index == state.posts.length) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          final Post myItem = state.posts[index];
-                          return InkWell(
-                            child: ListTile(
-                              title: Text(myItem.title!),
-                              subtitle: Text(myItem.url!),
-                              leading: Hero(
-                                tag: 'post_${myItem.id}',
-                                child: FadeInImage(
-                                  placeholder:
-                                      AssetImage('assets/images/placeholder.png'),
-                                  image: NetworkImage(myItem.thumbnailUrl!),
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              context.go('/details/${myItem.id}');
-                            },
-                          );
-                        }
-                      },
+            : state.status == PostStatus.failure
+                ? Center(
+                    child: Text(
+                      'Error occured. Try refreshing!',
+                      style: TextStyle(
+                        color: Colors.red,
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: state.currentPage == 1
-                            ? null
-                            : () => fetchPosts(state.currentPage - 1, ref),
-                        child: const Text('Prev'),
-                      ),
-                      Consumer(builder: (context, ref, child) {
-                        return Text(
-                          state.currentPage.toString(),
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      }),
-                      TextButton(
-                        onPressed: () => fetchPosts(state.currentPage + 1, ref),
-                        child: const Text('Next'),
-                      ),
-                    ],
                   )
-                ],
-              ),
+                : Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.posts.length +
+                              (state.status == PostStatus.loading ? 1 : 0),
+                          itemBuilder: (context, index) {
+                            if (index == state.posts.length) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              final Post myItem = state.posts[index];
+                              return InkWell(
+                                child: ListTile(
+                                  title: Text(myItem.title!),
+                                  subtitle: Text(myItem.url!),
+                                  leading: Hero(
+                                    tag: 'post_${myItem.id}',
+                                    child: FadeInImage(
+                                      placeholder: AssetImage(
+                                          'assets/images/placeholder.png'),
+                                      image: NetworkImage(myItem.thumbnailUrl!),
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  context.go('/details/${myItem.id}');
+                                },
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: state.currentPage == 1
+                                ? null
+                                : () => fetchPosts(state.currentPage - 1, ref),
+                            child: const Text('Prev'),
+                          ),
+                          Consumer(builder: (context, ref, child) {
+                            return Text(
+                              state.currentPage.toString(),
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            );
+                          }),
+                          TextButton(
+                            onPressed: () =>
+                                fetchPosts(state.currentPage + 1, ref),
+                            child: const Text('Next'),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
       ),
     );
   }
