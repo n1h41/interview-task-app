@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:interview_task_app/features/posts/repository/post_repository.dart';
 
 import '../data/module.dart';

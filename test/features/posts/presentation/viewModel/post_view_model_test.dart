@@ -44,6 +44,7 @@ void main() {
       await postViewModel.fetchPosts();
       // assert
       expect(
+        // ignore: invalid_use_of_protected_member
         postViewModel.state,
         equals(
           PostState(

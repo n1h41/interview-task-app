@@ -7,7 +7,7 @@ class DioApi {
   final Dio dio = Dio(_baseOptions);
 
   static final BaseOptions _baseOptions = BaseOptions(
-    baseUrl: Config.API_URL,
+    baseUrl: Config.apiUrl,
     responseType: ResponseType.json,
     receiveDataWhenStatusError: true,
     headers: {"Accept": "application/json"},
