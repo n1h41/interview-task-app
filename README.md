@@ -1,6 +1,6 @@
-# Flutter App with Riverpod, Dio, and Testing
+# Flutter App with Clean Architecture and MVVM
 
-This is a Flutter application that fetches a JSON list from an API and displays it in the app. It uses Riverpod for state management, Dio for API integration, and includes integration testing using Mockito. The code is made reusable with the use of Flutter Hooks and Hooks Riverpod, and routing is handled with Go Router.
+This is a Flutter application that fetches a JSON list from an API and displays it in the app. It uses Riverpod for state management, Dio for API integration, and includes integration testing using Mockito. The code is made reusable with the use of Flutter Hooks and Hooks Riverpod, and routing is handled with Go Router. The project follows clean code architecture principles and uses the MVVM design pattern.
 
 ## Getting Started
 
@@ -18,6 +18,8 @@ To get started with this project, follow these steps:
 - Includes integration testing using Mockito.
 - Code is made reusable with Flutter Hooks and Hooks Riverpod.
 - Routing is handled with Go Router.
+- Follows clean code architecture principles.
+- Uses the MVVM design pattern.
 - Easy to use and customize.
 
 ## Dependencies
